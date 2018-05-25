@@ -1,7 +1,6 @@
 # Spring Boot Camel Integration example
 Example using spring boot with camel and dynamically adding routes to different REST APIs.
 
-
 ### Adding sample vin lookup API proxy
 ```
 curl -v -XPOST -H 'content-type: application/json' 'http://localhost:8080/route/' -d '
