@@ -15,32 +15,18 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("route")
 public class RouteController {
     private final CamelContext camelContext;
-    private final ProducerTemplate producerTemplate;
     private final String VEHICLE_URL = "http://www.mocky.io/v2/5b0790c12f0000b118c620ff";
     private final String BUSINESS_URL = "http://www.mocky.io/v2/5b08589a3200005a00700276";
     private final Map<String, RouteInfo> routeInfoRegistry = new ConcurrentHashMap<>();
 
     @Autowired
-    public RouteController(final CamelContext camelContext, final ProducerTemplate producerTemplate) {
+    public RouteController(final CamelContext camelContext) {
         this.camelContext = camelContext;
-        this.producerTemplate = producerTemplate;
     }
 
     @RequestMapping(value = "/{routeId}", method = RequestMethod.GET)
     public @ResponseBody RouteInfo get(@PathVariable("routeId") final String routeId) {
         return routeInfoRegistry.get(routeId);
-    }
-
-    @RequestMapping(value = "/invoke/{routeId}", method = RequestMethod.POST)
-    public void invoke(@RequestBody String body, @PathVariable("routeId") String routeId, HttpServletResponse response) throws IOException {
-        if (camelContext.hasEndpoint("direct:" + routeId) != null && routeInfoRegistry.containsKey(routeId)) {
-            System.out.println("Sending: " + body);
-            String resp = producerTemplate.requestBody("direct:" + routeId, body, String.class);
-            response.setStatus(200);
-            response.getWriter().write(resp);
-        } else {
-            response.setStatus(404);
-        }
     }
 
     @RequestMapping(method = RequestMethod.POST)

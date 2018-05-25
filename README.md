@@ -18,7 +18,7 @@ curl -v -XPOST -H 'content-type: application/json' 'http://localhost:8080/route/
 
 ## Invoking sample vin lookup proxy
 ```
-curl -v -H 'content-type: application/json' -XPOST 'http://localhost:8080/route/invoke/vin-lookup' -d '                                                                           [13:49:01]
+curl -v -H 'content-type: application/json' -XPOST 'http://localhost:8080/vin-lookup' -d '                                                                           [13:49:01]
 {
   "vin": "1234"
 }
@@ -46,7 +46,7 @@ curl -v -XPOST -H 'content-type: application/json' 'http://localhost:8080/route/
 
 ### Invoking the sample fein lookup proxy
 ```
-curl -v -H 'content-type: application/json' -XPOST 'http://localhost:8080/route/invoke/fein-lookup' -d '                                                                           [13:49:01]
+curl -v -H 'content-type: application/json' -XPOST 'http://localhost:8080/fein-lookup' -d '                                                                           [13:49:01]
 {
   "fein": "1234"
 }
